@@ -4,330 +4,532 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Playlist</title>
+    <title>Music Playlist</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Prevent flash before stylesheet loads */
+    </style>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="background-glow glow-one"></div>
-    <div class="background-glow glow-two"></div>
+<div class="app">
 
-    <main class="app">
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
+    <aside class="sidebar">
 
-            <div class="brand">
-                <div class="brand-icon">
-                    ♪
-                </div>
+        <div class="brand">
+            <div class="brand-icon">♫</div>
 
-                <div>
-                    <h1>My Music</h1>
-                    <span>Personal Player</span>
-                </div>
+            <div>
+                <div class="brand-title">My Music</div>
+                <div class="brand-subtitle">Personal Player</div>
             </div>
+        </div>
 
-            <div class="sidebar-section">
 
-                <button class="sidebar-button active" id="playlistButton">
-                    <span>♫</span>
-                    Playlist
-                </button>
+        <div class="sidebar-divider"></div>
 
-                <button class="sidebar-button" id="clearButton">
-                    <span>⌫</span>
-                    Clear Playlist
-                </button>
 
-            </div>
+        <!-- Main navigation -->
 
-            <div class="sidebar-bottom">
+        <div class="sidebar-nav">
 
-                <button class="sidebar-button" id="exportButton">
-                    <span>↥</span>
-                    Export Playlist
-                </button>
+            <button class="sidebar-button active" id="playlistButton">
+                <span class="sidebar-button-icon">♫</span>
+                <span>Playlist</span>
+            </button>
 
-                <button class="sidebar-button" id="importButton">
-                    <span>↧</span>
-                    Import Playlist
-                </button>
+        </div>
 
-                <input
-                    type="file"
-                    id="importFile"
-                    accept=".json"
-                    hidden
+
+        <!-- =========================
+             PLAYLISTS
+        ========================== -->
+
+        <div class="playlist-sidebar-section">
+
+            <div class="sidebar-section-header">
+
+                <span>PLAYLISTS</span>
+
+                <button
+                    class="new-playlist-button"
+                    id="newPlaylistButton"
+                    title="New playlist"
                 >
+                    +
+                </button>
 
             </div>
 
-        </aside>
+
+            <div
+                class="playlist-list"
+                id="playlistList"
+            ></div>
+
+        </div>
 
 
-        <!-- MAIN CONTENT -->
-        <section class="content">
+        <!-- =========================
+             SIDEBAR BOTTOM
+        ========================== -->
 
-            <!-- TOP BAR -->
-            <header class="topbar">
+        <div class="sidebar-bottom">
+
+            <button
+                class="sidebar-button"
+                id="clearButton"
+            >
+                <span class="sidebar-button-icon">⌫</span>
+                <span>Clear Playlist</span>
+            </button>
+
+
+            <button
+                class="sidebar-button"
+                id="exportButton"
+            >
+                <span class="sidebar-button-icon">⇩</span>
+                <span>Export Playlists</span>
+            </button>
+
+
+            <button
+                class="sidebar-button"
+                id="importButton"
+            >
+                <span class="sidebar-button-icon">⇧</span>
+                <span>Import Playlists</span>
+            </button>
+
+            <input
+                type="file"
+                id="importFile"
+                accept=".json,application/json"
+                hidden
+            >
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="content">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="playlist-heading">
+
+                <div class="small-label">
+                    CURRENT PLAYLIST
+                </div>
+
+                <div
+                    class="playlist-title"
+                    id="playlistTitle"
+                    contenteditable="true"
+                    spellcheck="false"
+                    title="Click to rename"
+                >
+                    My Playlist
+                </div>
+
+                <div class="rename-hint">
+                    Click the title to rename
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="shuffleButton"
+                    title="Shuffle"
+                >
+                    ⤨
+                </button>
+
+                <button
+                    class="icon-button"
+                    id="repeatButton"
+                    title="Repeat"
+                >
+                    ↻
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             ADD SONG
+        ========================== -->
+
+        <section class="glass-card add-section">
+
+            <div class="section-heading">
 
                 <div>
-                    <p class="eyebrow">YOUR COLLECTION</p>
+                    <div class="section-title">
+                        Add Songs
+                    </div>
 
-                    <h2
-                        id="playlistTitle"
-                        contenteditable="true"
-                        spellcheck="false"
-                    >
-                        My Playlist
-                    </h2>
-                </div>
-
-                <div class="top-actions">
-
-                    <button
-                        class="icon-button"
-                        id="shuffleButton"
-                        title="Shuffle"
-                    >
-                        🔀
-                    </button>
-
-                    <button
-                        class="icon-button"
-                        id="repeatButton"
-                        title="Repeat"
-                    >
-                        🔁
-                    </button>
-
-                </div>
-
-            </header>
-
-
-            <!-- ADD SONG -->
-            <section class="add-section">
-
-                <div class="add-header">
-                    <div>
-                        <h3>Add Songs</h3>
-
-                        <p>
-                            Paste YouTube or YouTube Music links below.
-                            You can paste multiple links at once.
-                        </p>
+                    <div class="section-description">
+                        Paste YouTube or YouTube Music links below
                     </div>
                 </div>
+
+            </div>
+
+
+            <div class="add-row">
 
                 <textarea
                     id="linkInput"
-                    placeholder="https://music.youtube.com/watch?v=...
-https://www.youtube.com/watch?v=...
-https://youtu.be/..."
-                    spellcheck="false"
+                    class="link-input"
+                    rows="3"
+                    placeholder="Paste one or more YouTube / YouTube Music links..."
                 ></textarea>
 
-                <div class="add-actions">
 
-                    <span id="linkStatus">
-                        Ready
-                    </span>
+                <button
+                    class="primary-button"
+                    id="addButton"
+                >
+                    <span>＋</span>
+                    Add Songs
+                </button>
+
+            </div>
+
+
+            <div
+                class="link-status"
+                id="linkStatus"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             PLAYER
+        ========================== -->
+
+        <section class="glass-card player-card">
+
+            <div class="player-wrapper">
+
+                <div
+                    id="player"
+                    class="youtube-player"
+                ></div>
+
+                <div
+                    class="player-placeholder"
+                    id="playerPlaceholder"
+                >
+
+                    <div class="placeholder-icon">
+                        ♪
+                    </div>
+
+                    <div class="placeholder-title">
+                        Nothing playing
+                    </div>
+
+                    <div class="placeholder-description">
+                        Choose a song from your playlist
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- NOW PLAYING -->
+
+            <div class="now-playing">
+
+                <div class="now-playing-info">
+
+                    <div class="now-playing-label">
+                        NOW PLAYING
+                    </div>
+
+                    <div
+                        class="now-playing-title"
+                        id="nowPlayingTitle"
+                    >
+                        Nothing playing
+                    </div>
+
+                </div>
+
+
+                <div class="player-controls">
 
                     <button
-                        class="primary-button"
-                        id="addButton"
+                        class="control-button"
+                        id="previousButton"
+                        title="Previous"
                     >
-                        <span>＋</span>
-                        Add to Playlist
+                        ⏮
+                    </button>
+
+                    <button
+                        class="control-button play-button"
+                        id="playButton"
+                        title="Play / Pause"
+                    >
+                        ▶
+                    </button>
+
+                    <button
+                        class="control-button"
+                        id="nextButton"
+                        title="Next"
+                    >
+                        ⏭
                     </button>
 
                 </div>
 
-            </section>
+            </div>
+
+        </section>
 
 
-            <!-- PLAYER -->
-            <section class="player-section">
+        <!-- =========================
+             SONG LIST
+        ========================== -->
 
-                <div class="player-wrapper">
+        <section class="glass-card songs-card">
 
-                    <div id="player"></div>
+            <div class="section-heading">
 
-                    <div
-                        class="player-placeholder"
-                        id="playerPlaceholder"
-                    >
-                        <div class="placeholder-icon">
-                            ♪
-                        </div>
+                <div>
 
-                        <h3>No song selected</h3>
+                    <div class="section-title">
+                        Songs
+                    </div>
 
-                        <p>
-                            Choose a song from your playlist to start listening.
-                        </p>
-
+                    <div class="section-description">
+                        <span id="songCount">0</span> songs
                     </div>
 
                 </div>
 
-                <div class="player-info">
+            </div>
 
-                    <div class="now-playing">
 
-                        <span class="now-playing-label">
-                            NOW PLAYING
-                        </span>
+            <div
+                class="song-list"
+                id="songList"
+            ></div>
 
-                        <h3 id="nowPlayingTitle">
-                            Nothing playing
-                        </h3>
 
-                        <p id="nowPlayingNumber">
-                            Select a song from your playlist
-                        </p>
+            <div
+                class="empty-state"
+                id="emptyState"
+            >
 
-                    </div>
-
-                    <div class="player-controls">
-
-                        <button
-                            class="control-button"
-                            id="previousButton"
-                            title="Previous"
-                        >
-                            ⏮
-                        </button>
-
-                        <button
-                            class="play-button"
-                            id="playButton"
-                            title="Play"
-                        >
-                            ▶
-                        </button>
-
-                        <button
-                            class="control-button"
-                            id="nextButton"
-                            title="Next"
-                        >
-                            ⏭
-                        </button>
-
-                    </div>
-
+                <div class="empty-icon">
+                    ♫
                 </div>
 
-            </section>
-
-
-            <!-- PLAYLIST -->
-            <section class="playlist-section">
-
-                <div class="playlist-header">
-
-                    <div>
-                        <p class="eyebrow">QUEUE</p>
-
-                        <h3>
-                            Your Songs
-                            <span id="songCount">0</span>
-                        </h3>
-                    </div>
-
-                    <span class="drag-hint">
-                        Drag to reorder
-                    </span>
-
+                <div class="empty-title">
+                    Your playlist is empty
                 </div>
 
-
-                <div
-                    class="song-list"
-                    id="songList"
-                >
-
-                    <div
-                        class="empty-state"
-                        id="emptyState"
-                    >
-
-                        <div class="empty-icon">
-                            ♫
-                        </div>
-
-                        <h3>Your playlist is empty</h3>
-
-                        <p>
-                            Paste some YouTube links above to get started.
-                        </p>
-
-                    </div>
-
+                <div class="empty-description">
+                    Add some YouTube links above to get started.
                 </div>
 
-            </section>
+            </div>
 
         </section>
 
     </main>
 
+</div>
 
-    <!-- CONFIRMATION MODAL -->
-    <div
-        class="modal-overlay"
-        id="modalOverlay"
-    >
 
-        <div class="modal">
+<!-- =========================
+     CLEAR PLAYLIST MODAL
+========================== -->
 
-            <div class="modal-icon">
-                !
-            </div>
+<div
+    class="modal-overlay"
+    id="clearModalOverlay"
+>
 
-            <h3>Clear playlist?</h3>
+    <div class="modal">
 
-            <p>
-                This will remove every song from your saved playlist.
-            </p>
+        <div class="modal-icon">
+            !
+        </div>
 
-            <div class="modal-actions">
+        <h3>
+            Clear Playlist?
+        </h3>
 
-                <button
-                    class="secondary-button"
-                    id="cancelClear"
-                >
-                    Cancel
-                </button>
+        <p>
+            This will remove every song from the current playlist.
+            The playlist itself will remain.
+        </p>
 
-                <button
-                    class="danger-button"
-                    id="confirmClear"
-                >
-                    Clear Playlist
-                </button>
+        <div class="modal-actions">
 
-            </div>
+            <button
+                class="secondary-button"
+                id="cancelClear"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="danger-button"
+                id="confirmClear"
+            >
+                Clear Playlist
+            </button>
 
         </div>
 
     </div>
 
+</div>
 
-    <!-- YOUTUBE IFRAME API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
 
-    <script src="script.js"></script>
+<!-- =========================
+     NEW PLAYLIST MODAL
+========================== -->
+
+<div
+    class="modal-overlay"
+    id="playlistModalOverlay"
+>
+
+    <div class="modal">
+
+        <div class="modal-icon music-modal-icon">
+            ♫
+        </div>
+
+        <h3 id="playlistModalTitle">
+            New Playlist
+        </h3>
+
+        <p id="playlistModalDescription">
+            Give your new playlist a name.
+        </p>
+
+
+        <input
+            type="text"
+            id="playlistNameInput"
+            class="playlist-name-input"
+            placeholder="Playlist name"
+            maxlength="60"
+            autocomplete="off"
+        >
+
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-button"
+                id="cancelPlaylistModal"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="primary-button modal-primary-button"
+                id="savePlaylistModal"
+            >
+                Create Playlist
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     DELETE PLAYLIST MODAL
+========================== -->
+
+<div
+    class="modal-overlay"
+    id="deletePlaylistModalOverlay"
+>
+
+    <div class="modal">
+
+        <div class="modal-icon">
+            !
+        </div>
+
+        <h3>
+            Delete Playlist?
+        </h3>
+
+        <p>
+            This will permanently remove this playlist and all of its songs.
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-button"
+                id="cancelDeletePlaylist"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="danger-button"
+                id="confirmDeletePlaylist"
+            >
+                Delete Playlist
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- YouTube IFrame API -->
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script src="script.js"></script>
 
 </body>
 </html>
