@@ -390,8 +390,7 @@ function renderPlaylistSidebar() {
         icon.className =
             "playlist-item-icon";
 
-        icon.textContent = "♫";
-
+        icon.textContent = "♪";
 
         /* Name */
 
