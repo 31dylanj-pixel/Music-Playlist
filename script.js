@@ -1605,6 +1605,10 @@ function nextSong() {
     let nextIndex;
 
 
+    /* -----------------------------------------
+       SHUFFLE
+    ----------------------------------------- */
+
     if (shuffleEnabled) {
 
         if (songs.length === 1) {
@@ -1626,21 +1630,44 @@ function nextSong() {
             );
         }
 
-    } else {
+    }
+
+
+    /* -----------------------------------------
+       NORMAL ORDER
+    ----------------------------------------- */
+
+    else {
 
         nextIndex =
             currentIndex + 1;
 
 
+        /*
+           Reached the end of the playlist.
+        */
+
         if (
             nextIndex >= songs.length
         ) {
+
+            /*
+               Repeat ON:
+               Go back to the first song.
+            */
 
             if (repeatEnabled) {
 
                 nextIndex = 0;
 
-            } else {
+            }
+
+            /*
+               Repeat OFF:
+               Stay on the last song.
+            */
+
+            else {
 
                 nextIndex =
                     songs.length - 1;
@@ -1651,7 +1678,6 @@ function nextSong() {
 
     playSong(nextIndex);
 }
-
 
 /* =========================================================
    PREVIOUS
@@ -1696,17 +1722,66 @@ function previousSong() {
 
 function handlePlayerEnded() {
 
+    const playlist =
+        getCurrentPlaylist();
+
+    const songs =
+        playlist.songs;
+
+
+    if (!songs.length) {
+        return;
+    }
+
+
+    /*
+       If Repeat is enabled, move to the
+       next song and wrap around to the
+       beginning when necessary.
+    */
+
     if (repeatEnabled) {
 
-        player.playVideo();
+        nextSong();
 
         return;
     }
 
 
-    nextSong();
-}
+    /*
+       Repeat is disabled.
 
+       If there is another song,
+       continue normally.
+
+       If we're already on the last song,
+       stop there.
+    */
+
+    if (
+        currentIndex <
+        songs.length - 1
+    ) {
+
+        nextSong();
+
+    } else {
+
+        /*
+           Keep the last song selected,
+           but don't restart it.
+        */
+
+        currentIndex =
+            songs.length - 1;
+
+        renderSongs();
+
+        updateNowPlaying();
+
+        updateControls();
+    }
+}
 
 /* =========================================================
    STOP PLAYER
