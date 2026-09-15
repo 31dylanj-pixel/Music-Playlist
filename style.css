@@ -424,24 +424,28 @@ button {
 
 
 .playlist-item-icon {
-    width: 23px;
-    height: 23px;
-
-    flex: 0 0 23px;
+    width: 32px;
+    height: 32px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 7px;
+    font-size: 20px;
+    font-weight: 700;
 
-    color: var(--accent-light);
+    background: linear-gradient(
+        135deg,
+        #7c5cff,
+        #4cc9f0
+    );
 
-    background: rgba(110,168,255,0.08);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 
-    font-size: 12px;
+    flex-shrink: 0;
 }
-
 
 .playlist-item.active .playlist-item-icon {
     background: rgba(110,168,255,0.15);
