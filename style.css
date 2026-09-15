@@ -911,8 +911,9 @@ button {
     height: 100%;
 
     position: absolute;
-
     inset: 0;
+
+    z-index: 1;
 }
 
 
@@ -929,8 +930,9 @@ button {
     height: 100%;
 
     position: absolute;
-
     inset: 0;
+
+    z-index: 10;
 
     display: flex;
     flex-direction: column;
@@ -939,12 +941,7 @@ button {
 
     text-align: center;
 
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(110,168,255,0.09),
-            transparent 45%
-        );
+    background: #02060c;
 }
 
 
