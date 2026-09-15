@@ -149,33 +149,32 @@ button {
 
 
 .brand-icon {
-    width: 40px;
-    height: 40px;
+    width: 46px;
+    height: 46px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 13px;
+    border-radius: 14px;
 
-    font-size: 21px;
-    font-weight: 700;
+    background: linear-gradient(
+        135deg,
+        #7c5cff 0%,
+        #5b8cff 50%,
+        #4cc9f0 100%
+    );
 
     color: white;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(110, 168, 255, 0.28),
-            rgba(90, 94, 180, 0.25)
-        );
-
-    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 25px;
+    font-weight: 700;
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,0.18);
-}
+        0 8px 25px rgba(92, 92, 255, 0.25);
 
+    flex-shrink: 0;
+}
 
 .brand-title {
     font-family: "Montserrat", sans-serif;
