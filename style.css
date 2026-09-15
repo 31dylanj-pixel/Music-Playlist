@@ -946,24 +946,26 @@ button {
 
 
 .placeholder-icon {
-    width: 56px;
-    height: 56px;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: linear-gradient(
+        135deg,
+        #7c5cff 0%,
+        #5b8cff 50%,
+        #4cc9f0 100%
+    );
 
-    margin-bottom: 13px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 
-    border-radius: 18px;
+    filter:
+        drop-shadow(0 0 10px rgba(124, 92, 255, 0.45))
+        drop-shadow(0 0 18px rgba(76, 201, 240, 0.2));
 
-    color: var(--accent-light);
-
-    background: rgba(110,168,255,0.08);
-
-    border: 1px solid rgba(110,168,255,0.1);
-
-    font-size: 25px;
+    margin-bottom: 16px;
 }
 
 
@@ -974,6 +976,11 @@ button {
     font-weight: 600;
 }
 
+.placeholder-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 5px;
+}
 
 .placeholder-description {
     margin-top: 5px;
