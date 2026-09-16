@@ -1323,12 +1323,22 @@ function renderSongs() {
             item.addEventListener(
                 "dragend",
                 () => {
-
+            
                     draggedIndex = null;
-
+            
                     item.classList.remove(
                         "dragging"
                     );
+            
+                    document
+                        .querySelectorAll(".song-item")
+                        .forEach(
+                            song => {
+                                song.classList.remove(
+                                    "drag-over"
+                                );
+                            }
+                        );
                 }
             );
 
@@ -1336,18 +1346,40 @@ function renderSongs() {
             item.addEventListener(
                 "dragover",
                 event => {
-
+            
                     event.preventDefault();
+            
+                    if (
+                        draggedIndex === null ||
+                        draggedIndex === index
+                    ) {
+                        return;
+                    }
+            
+                    item.classList.add("drag-over");
                 }
             );
 
+            item.addEventListener(
+                "dragleave",
+                () => {
+            
+                    item.classList.remove(
+                        "drag-over"
+                    );
+                }
+            );
 
             item.addEventListener(
                 "drop",
                 event => {
-
+            
                     event.preventDefault();
-
+            
+                    item.classList.remove(
+                        "drag-over"
+                    );
+            
                     reorderSongs(
                         draggedIndex,
                         index
