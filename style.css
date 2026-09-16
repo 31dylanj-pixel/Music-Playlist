@@ -1117,7 +1117,8 @@ button {
 .song-item {
     display: flex;
     align-items: center;
-
+    position: relative;
+   
     gap: 10px;
 
     min-width: 0;
@@ -1144,6 +1145,29 @@ button {
     border-color: var(--border);
 }
 
+.song-item.drag-over::before {
+    content: "";
+
+    position: absolute;
+
+    left: 12px;
+    right: 12px;
+    top: -4px;
+
+    height: 2px;
+
+    border-radius: 999px;
+
+    background: linear-gradient(
+        90deg,
+        #7c5cff,
+        #5b8cff,
+        #4cc9f0
+    );
+
+    box-shadow:
+        0 0 8px rgba(124, 92, 255, 0.55);
+}
 
 .song-item.playing {
     background: rgba(110,168,255,0.09);
@@ -1154,8 +1178,33 @@ button {
 
 .song-item.dragging {
     opacity: 0.45;
+    transform: scale(0.985);
+
+    border-color: rgba(124, 92, 255, 0.35);
+
+    background: rgba(124, 92, 255, 0.08);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25);
+
+    cursor: grabbing;
 }
 
+.song-item.drag-over {
+    border-color: rgba(124, 92, 255, 0.45);
+
+    background: rgba(124, 92, 255, 0.08);
+
+    transform: translateY(2px);
+}
+
+.song-item {
+    cursor: grab;
+}
+
+.song-item:active {
+    cursor: grabbing;
+}
 
 .song-number {
     width: 23px;
